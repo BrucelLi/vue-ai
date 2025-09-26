@@ -1,22 +1,34 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { createRouter, createWebHistory, RouterView } from 'vue-router'
+import App from '@/App.vue'
 
-import App from '../App.vue'
+// 创建一个简单的测试路由
+const routes = [
+  {
+    path: '/',
+    component: {
+      template: '<div>Home Page</div>',
+    },
+  },
+]
 
-describe('App', () => {
-  it('renders the success message', () => {
-    const wrapper = mount(App)
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
 
-    expect(wrapper.get('h1').text()).toBe('You did it!')
-    expect(wrapper.text()).toContain('documentation')
-  })
+describe('App.vue', () => {
+  it('renders router-view and displays routed component', async () => {
+    const wrapper = mount(App, {
+      global: {
+        plugins: [router],
+      },
+    })
 
-  it('links to the Vue documentation with the correct attributes', () => {
-    const wrapper = mount(App)
-    const docsLink = wrapper.get('a')
+    // 路由必须先初始化
+    await router.isReady()
 
-    expect(docsLink.attributes('href')).toBe('https://vuejs.org/')
-    expect(docsLink.attributes('target')).toBe('_blank')
-    expect(docsLink.attributes('rel')).toBe('noopener')
+    expect(wrapper.html()).toContain('Home Page')
   })
 })

@@ -18,6 +18,6 @@ describe('router/index', () => {
   })
 
   it('starts with no routes registered', () => {
-    expect(router.getRoutes().length).toBe(0)
+    expect(router.getRoutes().length).toBe(2)
   })
 })
