@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory, RouterView } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import App from '@/App.vue'
 
 // 创建一个简单的测试路由
